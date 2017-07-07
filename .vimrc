@@ -1,3 +1,9 @@
+execute pathogen#infect()
+call pathogen#helptags()
+
+syntax on
+filetype plugin indent on
+
 set nocompatible
 set t_Co=256
 set nowrap                                 " Set no wrap text
@@ -30,11 +36,7 @@ set numberwidth=2
 set cursorline
 set hidden                                 " Allow switching away from a changed buffer without saving.
 
-syntax enable " Enable syntax highlighting
-
 "set showtabline=2 "show tabline, 2 is always.
-
-filetype plugin indent on
 
 " finding Files:
 set path+=**
@@ -46,9 +48,6 @@ highlight Search cterm=underline
 
 " Auto-remove trailing spaces
 autocmd BufWritePre *.php :%s/\s\+$//e
-
-" Pathogen
-silent! execute pathogen#infect()
 
 " Shortcuts
 " =========
