@@ -42,7 +42,6 @@ set hidden                                 " Allow switching away from a changed
 set path+=**
 
 colorscheme molokai
-"colorscheme wwdc2016
 
 highlight Search cterm=underline
 
