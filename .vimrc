@@ -42,8 +42,12 @@ set hidden                                 " Allow switching away from a changed
 set path+=**
 
 colorscheme molokai
+set background=dark
 
 highlight Search cterm=underline
+
+hi Visual ctermbg=239
+hi VisualNOS ctermbg=242
 
 " Auto-remove trailing spaces
 autocmd BufWritePre *.php :%s/\s\+$//e
@@ -121,42 +125,6 @@ let g:ctrlp_custom_ignore = {
 
 let g:ctrlp_working_path_mode = 'r'
 
-" Lightline Settings
-
-"let g:lightline = {
-"	\ 'tabline': {
-"	\	'left': [ ['bufferline'] ]
-"	\ },
-"	\ 'component': {
-"	\   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before}%#TabLineSel#%{g:bufferline_status_info.current}%#LightLineLeft_active_3#%{g:bufferline_status_info.after}' 
-"	\ }
-"	\ }
-
-"let g:lightline = {
-"      \ 'tabline': {
-"      \   'left': [ ['bufferline'] ]
-"      \ },
-"      \ 'component_expand': {
-"      \   'bufferline': 'LightlineBufferline',
-"      \ },
-"      \ 'component_type': {
-"      \   'bufferline': 'tabsel',
-"      \ },
-"      \ }
-"
-"function! LightlineBufferline()
-"	call bufferline#refresh_status()
-"	return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
-"endfunction
-
-" Bufferline settings
-
-"let g:bufferline_modified = '*'
-"let g:bufferline_active_buffer_left = ''
-"let g:bufferline_active_buffer_right = ''
-"let g:bufferline_show_bufnr = 0 
-"let g:bufferline_solo_highlight = 0
-
 " Airline Settings
 
 "let g:airline_extensions=['bufferline', 'ctrlp', 'tabline']
@@ -170,7 +138,9 @@ let g:goyo_width=110
 
 command -nargs=+ Se execute 'vimgrep /' . [<f-args>][0] . '/ **/*.' . [<f-args>][1] | cw
 
-" Search for current word and replace with given text for files in arglist.
+" Populate list with :args first.
+" Search a word with / or *.
+" Use :Replace to replace all occurences in arglist
 function! Replace(bang, replace)
     let flag = 'ge'
     if !a:bang
@@ -183,4 +153,5 @@ endfunction
 
 command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
 
+" Or use <Leader> Replace
 nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
