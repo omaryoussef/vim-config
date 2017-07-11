@@ -35,6 +35,8 @@ set relativenumber
 set numberwidth=2
 set cursorline
 set hidden                                 " Allow switching away from a changed buffer without saving.
+set splitbelow
+set splitright
 
 "set showtabline=2 "show tabline, 2 is always.
 
@@ -50,6 +52,7 @@ hi Visual ctermbg=239
 hi VisualNOS ctermbg=242
 
 " Auto-remove trailing spaces
+autocmd BufNewFile,BufRead *.json set ft=javascript
 autocmd BufWritePre *.php :%s/\s\+$//e
 
 " Shortcuts
