@@ -84,7 +84,7 @@ map <c-space> ?
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " Open NERDTree
-nmap <leader>e :NERDTree<cr>
+nmap <silent> <leader>e :NERDTree<cr>
 
 " Fast saves
 nmap <leader>w :w!<cr>
@@ -126,7 +126,25 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
 
-let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = '0'
+
+" Use this function to prevent CtrlP opening files inside non-writeable 
+" buffers, e.g. NERDTree
+function! SwitchToWriteableBufferAndExec(command)
+    let c = 0
+    let wincount = winnr('$')
+    " Don't open it here if current buffer is not writable (e.g. NERDTree)
+    while !empty(getbufvar(+expand("<abuf>"), "&buftype")) && c < wincount
+        exec 'wincmd w'
+        let c = c + 1
+    endwhile
+    exec a:command
+endfunction
+
+" Disable default mapping since we are overriding it with our command
+let g:ctrlp_map = ''
+nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
+nnoremap <silent> <C-l> :call SwitchToWriteableBufferAndExec('CtrlPMRUFiles')<CR>
 
 " Airline Settings
 
