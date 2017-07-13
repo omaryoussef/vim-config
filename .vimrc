@@ -145,6 +145,7 @@ endfunction
 let g:ctrlp_map = ''
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
 nnoremap <silent> <C-l> :call SwitchToWriteableBufferAndExec('CtrlPMRUFiles')<CR>
+nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 
 " Airline Settings
 
