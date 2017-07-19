@@ -23,6 +23,8 @@ set number                                 " Always show line numbers
 set timeout timeoutlen=200 ttimeoutlen=100
 set showmatch
 set wildmenu
+set wildmode=list:longest,full
+set wildignorecase
 set visualbell                             " don't beep
 set noerrorbells                           " don't beep
 set autoread
@@ -46,6 +48,8 @@ set path+=**
 colorscheme molokai
 set background=dark
 
+set fillchars=""
+
 highlight Search cterm=underline
 
 hi Visual ctermbg=239
@@ -66,7 +70,7 @@ let g:mapleader = ","
 nnoremap <F5> yyp<c-v>$r=
 
 " Insert newline and return to normal mode
-nmap <C-o> o<Esc>
+"nmap <C-o> o<Esc>
 
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
@@ -144,7 +148,7 @@ endfunction
 " Disable default mapping since we are overriding it with our command
 let g:ctrlp_map = ''
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
-nnoremap <silent> <C-l> :call SwitchToWriteableBufferAndExec('CtrlPMRUFiles')<CR>
+"nnoremap <silent> <C-l> :call SwitchToWriteableBufferAndExec('CtrlPMRUFiles')<CR>
 nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 
 " Airline Settings
@@ -160,6 +164,18 @@ let g:goyo_width=110
 
 command -nargs=+ Se execute 'vimgrep /' . [<f-args>][0] . '/ **/*.' . [<f-args>][1] | cw
 
+function StripTrailingWhitespace()
+	if !&binary && &filetype != 'diff'
+		normal mz
+		normal Hmy
+		%s/\s\+$//e
+		normal 'yz<CR>
+		normal `z
+	endif
+endfunction
+
+command Strip :call StripTrailingWhitespace()
+
 " Populate list with :args first.
 " Search a word with / or *.
 " Use :Replace to replace all occurences in arglist
@@ -174,6 +190,7 @@ function! Replace(bang, replace)
 endfunction
 
 command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
+
 
 " Or use <Leader> Replace
 nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
