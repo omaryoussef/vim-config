@@ -21,8 +21,8 @@ set smartcase                              " Ignore case if search patter is all
 set showcmd                                " Show (Partial) command in status line
 set number                                 " Always show line numbers
 set timeout timeoutlen=200 ttimeoutlen=100
-set showmatch
-set wildmenu
+set showmatch                              " Show matching brackets
+set wildmenu                               " visual autocomplete for command menu
 set wildmode=list:longest,full
 set wildignorecase
 set visualbell                             " don't beep
@@ -34,13 +34,16 @@ set showmode                               " Shows helpful cues below the status
 set laststatus=2                           " Force show bufferline
 set encoding=utf-8
 set relativenumber
-set numberwidth=2
-set cursorline
+set numberwidth=2                          " Width of the number line
+set cursorline                             " Highlight current cursor line
 set hidden                                 " Allow switching away from a changed buffer without saving.
-set splitbelow
-set splitright
+set splitbelow                             " Set horizontal split below
+set splitright                             " Set vertical split below
+set shortmess=a
 
-"set showtabline=2 "show tabline, 2 is always.
+" Change backup and swap file directory.
+set noswapfile
+set nobackup
 
 " finding Files:
 set path+=**
@@ -49,6 +52,7 @@ colorscheme molokai
 set background=dark
 
 set fillchars=""
+highlight VertSplit ctermbg=233
 
 highlight Search cterm=underline
 

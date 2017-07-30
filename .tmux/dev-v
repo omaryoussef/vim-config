@@ -1,0 +1,5 @@
+#new  -s dev -n dev-vim vim
+#neww -n vim/zsh vim
+splitw -h -p 25 -t 0
+#selectw -t 1 
+selectp -t 0
