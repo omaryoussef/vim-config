@@ -52,7 +52,7 @@ colorscheme molokai
 set background=dark
 
 set fillchars=""
-highlight VertSplit ctermbg=233
+highlight VertSplit ctermbg=234
 
 highlight Search cterm=underline
 
