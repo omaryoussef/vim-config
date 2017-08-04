@@ -5,7 +5,7 @@ syntax on
 filetype plugin indent on
 
 set nocompatible
-set t_Co=256
+"set t_Co=256
 set nowrap                                 " Set no wrap text
 set tabstop=4                              " Tab stop to 4 spaces
 set smarttab                               " Do smart tab stops
@@ -48,8 +48,16 @@ set nobackup
 " finding Files:
 set path+=**
 
-colorscheme molokai
 set background=dark
+if (has('termguicolors'))
+    set termguicolors
+    colorscheme civic2
+    let g:airline_theme='minimalist'
+else
+    colorscheme molokai
+    let g:airline_theme='powerlineish'
+endif
+
 
 set fillchars=""
 highlight VertSplit ctermbg=234
@@ -160,7 +168,6 @@ nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 "let g:airline_extensions=['bufferline', 'ctrlp', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
-let g:airline_theme='powerlineish'
 let g:airline_exclude_preview=1
 
 " Goyo Settings
