@@ -4,7 +4,7 @@
 " 
 " @version: 1.0.0
 
-set background=dark
+set background=light
 
 hi clear
 
@@ -107,3 +107,4 @@ hi link htmlEndTag htmlTag
 " NerdTree
 hi NerdTreeDirSlash cterm=NONE ctermfg=231 ctermbg=231
 hi NerdTreeCWD cterm=NONE ctermfg=241 ctermbg=NONE
+

@@ -1,11 +1,14 @@
 execute pathogen#infect()
 call pathogen#helptags()
 
+set background=dark
+colorscheme civic
+
 syntax on
 filetype plugin indent on
 
-set nocompatible
 set t_Co=256
+set nocompatible
 set nowrap                                 " Set no wrap text
 set tabstop=4                              " Tab stop to 4 spaces
 set smarttab                               " Do smart tab stops
@@ -47,9 +50,6 @@ set nobackup
 
 " finding Files:
 set path+=**
-
-colorscheme molokai
-set background=dark
 
 set fillchars=""
 highlight VertSplit ctermbg=234
