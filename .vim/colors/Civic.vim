@@ -32,7 +32,7 @@ hi Boolean ctermfg=173 ctermbg=NONE cterm=NONE guifg=#c77a4b guibg=NONE gui=NONE
 hi Character ctermfg=173 ctermbg=NONE cterm=NONE guifg=#c77a4b guibg=NONE gui=NONE
 hi Comment ctermfg=77 ctermbg=NONE cterm=NONE guifg=#32cf72 guibg=NONE gui=NONE
 hi Conditional ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
-hi Constant ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi Constant ctermfg=66 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi Define ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
 hi DiffAdd ctermfg=254 ctermbg=64 cterm=bold guifg=#e1e2e7 guibg=#46830e gui=bold
 hi DiffDelete ctermfg=88 ctermbg=NONE cterm=NONE guifg=#8b080a guibg=NONE gui=NONE
@@ -53,11 +53,11 @@ hi Special ctermfg=254 ctermbg=NONE cterm=NONE guifg=#e1e2e7 guibg=NONE gui=NONE
 hi SpecialKey ctermfg=244 ctermbg=235 cterm=NONE guifg=#7f7f7f guibg=#383942 gui=NONE
 hi Statement ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
 hi StorageClass ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
-hi String ctermfg=167 ctermbg=NONE cterm=NONE guifg=#ca4540 guibg=NONE gui=NONE
+hi String ctermfg=161 ctermbg=NONE cterm=NONE guifg=#ca4540 guibg=NONE gui=NONE
 hi Tag ctermfg=97 ctermbg=NONE cterm=NONE guifg=#746db0 guibg=NONE gui=NONE
 hi Title ctermfg=254 ctermbg=NONE cterm=bold guifg=#e1e2e7 guibg=NONE gui=bold
 hi Todo ctermfg=77 ctermbg=NONE cterm=inverse,bold guifg=#32cf72 guibg=NONE gui=inverse,bold
-hi Type ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi Type ctermfg=162 ctermbg=NONE cterm=NONE guifg=#d7008f guibg=NONE gui=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
 hi rubyClass ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
 hi rubyFunction ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
@@ -93,6 +93,7 @@ hi htmlSpecialChar ctermfg=173 ctermbg=NONE cterm=NONE guifg=#c77a4b guibg=NONE 
 hi javaScriptFunction ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
 hi javaScriptRailsFunction ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi javaScriptBraces ctermfg=66 ctermbg=NONE cterm=NONE guifg=#55747c guibg=NONE gui=NONE
+hi jsFuncCall ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi yamlKey ctermfg=97 ctermbg=NONE cterm=NONE guifg=#746db0 guibg=NONE gui=NONE
 hi yamlAnchor ctermfg=254 ctermbg=NONE cterm=NONE guifg=#e1e2e7 guibg=NONE gui=NONE
 hi yamlAlias ctermfg=254 ctermbg=NONE cterm=NONE guifg=#e1e2e7 guibg=NONE gui=NONE
