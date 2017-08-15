@@ -51,7 +51,7 @@ set path+=**
 set background=dark
 if (has('termguicolors'))
     set termguicolors
-    colorscheme civic2
+    colorscheme Civic
     let g:airline_theme='minimalist'
 else
     colorscheme molokai
