@@ -11,7 +11,8 @@ set t_Co=256
 set nocompatible
 set nowrap                                 " Set no wrap text
 set tabstop=4                              " Tab stop to 4 spaces
-set smarttab                               " Do smart tab stops
+set softtabstop=4
+"set smarttab                               " Do smart tab stops
 set expandtab
 set shiftwidth=4                           " Number of spaces for auto-indenting
 set shiftround                             " Use multiple of shiftwidth when indenting with < and >
@@ -43,6 +44,7 @@ set hidden                                 " Allow switching away from a changed
 set splitbelow                             " Set horizontal split below
 set splitright                             " Set vertical split below
 set shortmess=a
+set gdefault                               " Global replace by default
 
 " Change backup and swap file directory.
 set noswapfile
@@ -198,3 +200,6 @@ command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
 
 " Or use <Leader> Replace
 nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
+
+" Use Q to repeat macro on visual lines
+xnoremap Q :'<,'>:normal @q<CR>
