@@ -94,6 +94,9 @@ hi javaScriptFunction ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NO
 hi javaScriptRailsFunction ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi javaScriptBraces ctermfg=66 ctermbg=NONE cterm=NONE guifg=#55747c guibg=NONE gui=NONE
 hi jsFuncCall ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
+hi phpClasses ctermfg=66 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
+hi phpFunction ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
+hi phpMethodsVar ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi yamlKey ctermfg=97 ctermbg=NONE cterm=NONE guifg=#746db0 guibg=NONE gui=NONE
 hi yamlAnchor ctermfg=254 ctermbg=NONE cterm=NONE guifg=#e1e2e7 guibg=NONE gui=NONE
 hi yamlAlias ctermfg=254 ctermbg=NONE cterm=NONE guifg=#e1e2e7 guibg=NONE gui=NONE
