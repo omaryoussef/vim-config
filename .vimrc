@@ -2,7 +2,7 @@ execute pathogen#infect()
 call pathogen#helptags()
 
 set background=dark
-colorscheme civic
+colorscheme Civic
 
 syntax on
 filetype plugin indent on
