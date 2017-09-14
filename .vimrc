@@ -24,7 +24,7 @@ set ignorecase                             " Ignore case while searching
 set smartcase                              " Ignore case if search patter is all lowercase
 set showcmd                                " Show (Partial) command in status line
 set number                                 " Always show line numbers
-set timeout timeoutlen=200 ttimeoutlen=100
+set timeout timeoutlen=2000 ttimeoutlen=100
 set showmatch                              " Show matching brackets
 set wildmenu                               " visual autocomplete for command menu
 set wildmode=list:longest,full
