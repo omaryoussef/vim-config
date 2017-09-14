@@ -129,14 +129,16 @@ if isdirectory(argv(0))
 endif
 
 " CtrlP Settings
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|node_modules|vendor)$',
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
 
-let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_clear_cache_on_exit = 0
 
 " Use this function to prevent CtrlP opening files inside non-writeable 
 " buffers, e.g. NERDTree
