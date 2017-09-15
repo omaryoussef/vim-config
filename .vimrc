@@ -53,9 +53,6 @@ set nobackup
 " finding Files:
 set path+=**
 
-set fillchars=""
-highlight VertSplit ctermbg=234
-
 highlight Search cterm=underline
 
 hi Visual ctermbg=239
