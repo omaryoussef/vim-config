@@ -136,6 +136,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_extensions = ['tag', 'buffertag']
 
 " Use this function to prevent CtrlP opening files inside non-writeable 
 " buffers, e.g. NERDTree
