@@ -4,6 +4,12 @@ call pathogen#helptags()
 set background=dark
 colorscheme Civic
 
+if has("gui_running")
+    set guifont=Meslo_LG_S:h10.4
+    set t_vb=0
+    set guicursor+=n-v-c:blinkon0
+endif
+
 syntax on
 filetype plugin indent on
 
@@ -12,7 +18,7 @@ set nocompatible
 set nowrap                                 " Set no wrap text
 set tabstop=4                              " Tab stop to 4 spaces
 set softtabstop=4
-"set smarttab                               " Do smart tab stops
+set smarttab                               " Do smart tab stops
 set expandtab
 set shiftwidth=4                           " Number of spaces for auto-indenting
 set shiftround                             " Use multiple of shiftwidth when indenting with < and >
