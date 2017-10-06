@@ -13,7 +13,7 @@ endif
 syntax on
 filetype plugin indent on
 
-set t_Co=256
+set t_Co=256                                " Enable 256 color mode.
 set nocompatible                            " Enable vim mode.
 set nowrap                                  " Set no wrap text
 set tabstop=4                               " Tab stop to 4 spaces
@@ -40,7 +40,7 @@ set visualbell                              " don't beep
 set noerrorbells                            " don't beep
 set autoread
 set incsearch                               " Incremental search
-set nohlsearch                              " Don't highlight search matches
+set nohlsearch                              " Don't highlight searches.
 set showmode                                " Shows helpful cues below the statusline
 set laststatus=2                            " Force show bufferline
 set encoding=utf-8
@@ -59,8 +59,6 @@ set nobackup
 
 " finding Files:
 set path+=**
-
-highlight Search cterm=underline
 
 hi Visual ctermbg=239
 hi VisualNOS ctermbg=242
