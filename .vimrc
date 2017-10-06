@@ -14,43 +14,44 @@ syntax on
 filetype plugin indent on
 
 set t_Co=256
-set nocompatible
-set nowrap                                 " Set no wrap text
-set tabstop=4                              " Tab stop to 4 spaces
+set nocompatible                            " Enable vim mode.
+set nowrap                                  " Set no wrap text
+set tabstop=4                               " Tab stop to 4 spaces
 set softtabstop=4
-set smarttab                               " Do smart tab stops
+set smarttab                                " Do smart tab stops
 set expandtab
-set shiftwidth=4                           " Number of spaces for auto-indenting
-set shiftround                             " Use multiple of shiftwidth when indenting with < and >
-set backspace=indent,eol,start             " Allow backspacing over everything in insert mode
-set autoindent                             " Set auto-indent on
-set smartindent                            " Set smart-indent on
-set copyindent                             " Copy indentation
-set ignorecase                             " Ignore case while searching
-set smartcase                              " Ignore case if search patter is all lowercase
-set showcmd                                " Show (Partial) command in status line
-set number                                 " Always show line numbers
+set shiftwidth=4                            " Number of spaces for auto-indenting
+set shiftround                              " Use multiple of shiftwidth when indenting with < and >
+set backspace=indent,eol,start              " Allow backspacing over everything in insert mode
+set autoindent                              " Set auto-indent on
+set smartindent                             " Set smart-indent on
+set copyindent                              " Copy indentation
+set preserveindent                          " Preserve indentation
+set ignorecase                              " Ignore case while searching
+set smartcase                               " Ignore case if search patter is all lowercase
+set showcmd                                 " Show (Partial) command in status line
+set number                                  " Always show line numbers
 set timeout timeoutlen=2000 ttimeoutlen=100
-set showmatch                              " Show matching brackets
-set wildmenu                               " visual autocomplete for command menu
+set showmatch                               " Show matching brackets
+set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:longest,full
 set wildignorecase
-set visualbell                             " don't beep
-set noerrorbells                           " don't beep
+set visualbell                              " don't beep
+set noerrorbells                            " don't beep
 set autoread
-set incsearch                              " Incremental search
-set nohlsearch                             " Don't highlight search matches
-set showmode                               " Shows helpful cues below the statusline
-set laststatus=2                           " Force show bufferline
+set incsearch                               " Incremental search
+set nohlsearch                              " Don't highlight search matches
+set showmode                                " Shows helpful cues below the statusline
+set laststatus=2                            " Force show bufferline
 set encoding=utf-8
 set relativenumber
-set numberwidth=2                          " Width of the number line
-set cursorline                             " Highlight current cursor line
-set hidden                                 " Allow switching away from a changed buffer without saving.
-set splitbelow                             " Set horizontal split below
-set splitright                             " Set vertical split below
+set numberwidth=2                           " Width of the number line
+set cursorline                              " Highlight current cursor line
+set hidden                                  " Allow switching away from a changed buffer without saving.
+set splitbelow                              " Set horizontal split below
+set splitright                              " Set vertical split below
 set shortmess=a
-set gdefault                               " Global replace by default
+set gdefault                                " Global replace by default
 
 " Change backup and swap file directory.
 set noswapfile
@@ -77,14 +78,6 @@ let g:mapleader = ","
 
 " Underline current line with dashes
 nnoremap <F5> yyp<c-v>$r=
-
-" Insert newline and return to normal mode
-"nmap <C-o> o<Esc>
-
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Disable highlight when <leader><cr> is pressed
 nnoremap <silent> <CR> :noh<CR><CR>
@@ -117,7 +110,7 @@ nmap <leader>l :bnext<cr>
 " Move to the previous buffer
 nmap <leader>h :bprevious<cr>
 
- if exists(":Tabularize")
+if exists(":Tabularize")
     nmap <Leader>a= :Tabularize /=<CR>
     vmap <Leader>a= :Tabularize /=<CR>
     nmap <Leader>a: :Tabularize /:\zs<CR>
@@ -126,25 +119,26 @@ endif
 
 " NERDTree to open directories when vim is launched on a directory
 if isdirectory(argv(0))
-    bd  
+    bd
     autocmd vimenter * exe "cd" argv(0)
     autocmd VimEnter * NERDTree
 endif
 
-" CtrlP Settings
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*
 
+" CtrlP Settings
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|node_modules|vendor)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-\}
+            \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|node_modules|vendor)$',
+            \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+            \}
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['tag']
+let g:ctrlp_map = ''
 
-" Use this function to prevent CtrlP opening files inside non-writeable 
+" Use this function to prevent CtrlP opening files inside non-writeable
 " buffers, e.g. NERDTree
 function! SwitchToWriteableBufferAndExec(command)
     let c = 0
@@ -158,9 +152,7 @@ function! SwitchToWriteableBufferAndExec(command)
 endfunction
 
 " Disable default mapping since we are overriding it with our command
-let g:ctrlp_map = ''
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
-"nnoremap <silent> <C-l> :call SwitchToWriteableBufferAndExec('CtrlPMRUFiles')<CR>
 nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 
 " Airline Settings
@@ -174,16 +166,14 @@ let g:airline_exclude_preview=1
 " Goyo Settings
 let g:goyo_width=110
 
-command -nargs=+ Se execute 'vimgrep /' . [<f-args>][0] . '/ **/*.' . [<f-args>][1] | cw
-
 function StripTrailingWhitespace()
-	if !&binary && &filetype != 'diff'
-		normal mz
-		normal Hmy
-		%s/\s\+$//e
-		normal 'yz<CR>
-		normal `z
-	endif
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
 endfunction
 
 command Strip :call StripTrailingWhitespace()
@@ -194,7 +184,7 @@ command Strip :call StripTrailingWhitespace()
 function! Replace(bang, replace)
     let flag = 'ge'
     if !a:bang
-    let flag .= 'c'
+        let flag .= 'c'
     endif
     let search = '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
     let replace = escape(a:replace, '/\&~')
@@ -209,3 +199,9 @@ nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '
 
 " Use Q to repeat macro on visual lines
 xnoremap Q :'<,'>:normal @q<CR>
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
