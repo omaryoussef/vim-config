@@ -65,10 +65,6 @@ highlight Search cterm=underline
 hi Visual ctermbg=239
 hi VisualNOS ctermbg=242
 
-" Auto-remove trailing spaces
-autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd BufWritePre *.php :%s/\s\+$//e
-
 " Shortcuts
 " =========
 
@@ -137,6 +133,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_map = ''
+let g:ctrlp_root_markers = ['.ctrlp']
 
 " Use this function to prevent CtrlP opening files inside non-writeable
 " buffers, e.g. NERDTree
