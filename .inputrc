@@ -1,0 +1,6 @@
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set completion-map-case on
+set completion-query-items 200
+
+TAB: menu-complete
