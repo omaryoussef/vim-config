@@ -1,0 +1,16 @@
+set relativenumber
+set laststatus=0
+set clipboard=unnamed
+
+" Set Leader
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saves
+
+nmap ,w :w!<cr>
+nmap ,q :q!<cr>
+nmap ,b :make<cr>
+nmap ,r :run<cr>
+nmap <space> /
+map <c-space> ?
