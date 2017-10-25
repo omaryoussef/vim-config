@@ -129,9 +129,10 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_extensions = ['tag']
+let g:ctrlp_extensions = ['tag', 'buffertags']
 let g:ctrlp_map = ''
 let g:ctrlp_root_markers = ['.ctrlp']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignore files in .gitignore
 
 " Use this function to prevent CtrlP opening files inside non-writeable
 " buffers, e.g. NERDTree
@@ -148,7 +149,8 @@ endfunction
 
 " Disable default mapping since we are overriding it with our command
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
-nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
+nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBufTag')<CR>
+nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 
 " Airline Settings
 
