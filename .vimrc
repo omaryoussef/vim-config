@@ -63,11 +63,27 @@ if executable("rg")
 endif
 
 " Define Rg command
+" Uses Rg if available, executes grepprg silently and works 
+" on <cword>
 fun! s:Rg(txt)
+    let ser = a:txt
+    if(empty(ser))
+        let ser = expand("<cword>")
+    endif
+
     if executable("rg")
-        execute "silent grep! --no-ignore-parent -g '!*.min.*' " a:txt | redraw! | copen 
+        execute "silent! grep! --no-ignore-parent -g '!*.min.*'" ser
     else
-        execute 'silent grep! ' a:txt | redraw! | copen 
+        execute 'silent! grep!' ser
+    endif
+
+    if len(getqflist())
+        copen 
+        redraw!
+    else
+        cclose
+        redraw!
+        echo "No match found for " . ser
     endif
 endfun
 command! -nargs=* -complete=file Rg :call s:Rg(<q-args>)
@@ -81,6 +97,9 @@ hi VisualNOS ctermbg=242
 " Set Leader
 let mapleader = ","
 let g:mapleader = ","
+
+" Global search
+nnoremap \ :Rg<SPACE>
 
 " Underline current line with dashes
 nnoremap <F5> yyp<c-v>$r=
