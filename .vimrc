@@ -52,13 +52,25 @@ set splitbelow                              " Set horizontal split below
 set splitright                              " Set vertical split below
 set shortmess=a
 set gdefault                                " Global replace by default
-
-" Change backup and swap file directory.
-set noswapfile
+set path+=**                                " finding Files:
+noswapfile
 set nobackup
 
-" finding Files:
-set path+=**
+" Use ripgrep if available
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" Define Rg command
+fun! s:Rg(txt)
+    if executable("rg")
+        execute "silent grep! --no-ignore-parent -g '!*.min.*' " a:txt | redraw! | copen 
+    else
+        execute 'silent grep! ' a:txt | redraw! | copen 
+    endif
+endfun
+command! -nargs=* -complete=file Rg :call s:Rg(<q-args>)
 
 hi Visual ctermbg=239
 hi VisualNOS ctermbg=242
@@ -90,19 +102,12 @@ nmap <silent> <leader>e :NERDTreeToggle<cr>
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 nmap <C-N><C-N> :set invnumber<CR>
+nnoremap <F6> :set invpaste paste?<CR>
+set pastetoggle=<F6>
 
-" Fast Paste without indent
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-
-" Create new buffer
-nmap <leader>t :enew<cr>
-
-" Move to the next buffer
 nmap <leader>l :bnext<cr>
-
-" Move to the previous buffer
 nmap <leader>h :bprevious<cr>
+nmap <leader>t :enew<cr>
 
 if exists(":Tabularize")
     nmap <Leader>a= :Tabularize /=<CR>
@@ -118,12 +123,12 @@ if isdirectory(argv(0))
     autocmd VimEnter * NERDTree
 endif
 
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*,*.min.*
 
 " CtrlP Settings
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|node_modules|vendor)$',
-            \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+            \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|min|tags)$',
             \}
 
 let g:ctrlp_working_path_mode = 'ra'
@@ -132,7 +137,13 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['tag', 'buffertags']
 let g:ctrlp_map = ''
 let g:ctrlp_root_markers = ['.ctrlp']
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignore files in .gitignore
+
+if(executable('rg'))
+    let g:ctrlp_user_command = 'rg %s --files --no-ignore-parent --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignore files in .gitignore
+endif
 
 " Use this function to prevent CtrlP opening files inside non-writeable
 " buffers, e.g. NERDTree
@@ -149,21 +160,21 @@ endfunction
 
 " Disable default mapping since we are overriding it with our command
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
+nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
 nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBufTag')<CR>
-nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
+nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('CtrlPTag')<CR>
 
 " Airline Settings
 
 "let g:airline_extensions=['bufferline', 'ctrlp', 'tabline']
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
 let g:airline_theme='powerlineish'
 let g:airline_exclude_preview=1
 
 " Goyo Settings
 let g:goyo_width=110
 
-function StripTrailingWhitespace()
+function! StripTrailingWhitespace()
     if !&binary && &filetype != 'diff'
         normal mz
         normal Hmy
@@ -173,7 +184,7 @@ function StripTrailingWhitespace()
     endif
 endfunction
 
-command Strip :call StripTrailingWhitespace()
+command! Strip :call StripTrailingWhitespace()
 
 " Populate list with :args first.
 " Search a word with / or *.
@@ -189,7 +200,6 @@ function! Replace(bang, replace)
 endfunction
 
 command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
-
 
 " Or use <Leader> Replace
 nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
