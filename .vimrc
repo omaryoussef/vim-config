@@ -53,7 +53,7 @@ set splitright                              " Set vertical split below
 set shortmess=a
 set gdefault                                " Global replace by default
 set path+=**                                " finding Files:
-noswapfile
+set noswapfile
 set nobackup
 
 " Use ripgrep if available
