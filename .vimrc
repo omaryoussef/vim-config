@@ -72,9 +72,9 @@ fun! s:Rg(txt)
     endif
 
     if executable("rg")
-        execute "silent! grep! --no-ignore-parent -g '!*.min.*'" ser
+        execute "silent! grep! -i --no-ignore-parent -g '!*.min.*'" ser
     else
-        execute 'silent! grep!' ser
+        execute 'silent! grep! -irF' ser
     endif
 
     if len(getqflist())
