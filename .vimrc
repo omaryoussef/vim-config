@@ -1,5 +1,19 @@
-execute pathogen#infect()
-call pathogen#helptags()
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-easy-align'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'godlygeek/tabular'
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'sheerun/vim-polyglot'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+call plug#end()
 
 set background=dark
 colorscheme Civic
@@ -10,8 +24,8 @@ if has("gui_running")
     set guicursor+=n-v-c:blinkon0
 endif
 
-syntax on
-filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+autocmd CompleteDone * pclose
 
 set t_Co=256                                " Enable 256 color mode.
 set nocompatible                            " Enable vim mode.
@@ -63,7 +77,7 @@ if executable("rg")
 endif
 
 " Define Rg command
-" Uses Rg if available, executes grepprg silently and works 
+" Uses Rg if available, executes grepprg silently and works
 " on <cword>
 fun! s:Rg(txt)
     let ser = a:txt
@@ -78,7 +92,7 @@ fun! s:Rg(txt)
     endif
 
     if len(getqflist())
-        copen 
+        copen
         redraw!
     else
         cclose
