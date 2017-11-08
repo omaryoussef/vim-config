@@ -134,6 +134,7 @@ nmap <silent> <leader>e :NERDTreeToggle<cr>
 " Fast saves
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
+nmap <leader>k :bd<cr>
 nmap <C-N><C-N> :set invnumber<CR>
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
