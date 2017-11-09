@@ -90,9 +90,9 @@ fun! s:Rg(txt)
     endif
 
     if executable("rg")
-        execute "silent! grep! -i --no-ignore-parent -g '!*.min.*'" ser
+        execute "silent! grep! -i --no-ignore-parent -g '!*.min.*' " . ser
     else
-        execute 'silent! grep! -irF' ser
+        execute 'silent! grep! -irF ' . ser . " ."
     endif
 
     if len(getqflist())
@@ -265,7 +265,9 @@ nnoremap <leader>c :SyntasticCheck<cr>
 " MUcomplete Configuration
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 set completeopt+=menuone
-set completeopt+=noinsert
+if(exists("&noinsert"))
+    set completeopt+=noinsert
+endif
 set completeopt-=preview
 inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
 inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
