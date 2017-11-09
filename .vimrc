@@ -1,3 +1,5 @@
+" Measure startup time with:
+" vim --startuptime vim.log
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -15,6 +17,9 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Olical/vim-enmasse'
 Plug 'vim-scripts/ZoomWin', { 'tag': '23' }
+Plug 'vim-syntastic/syntastic'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'lifepillar/vim-mucomplete'
 call plug#end()
 
 set background=dark
@@ -25,9 +30,6 @@ if has("gui_running")
     set t_vb=0
     set guicursor+=n-v-c:blinkon0
 endif
-
-set omnifunc=syntaxcomplete#Complete
-autocmd CompleteDone * pclose
 
 set t_Co=256                                " Enable 256 color mode.
 set nocompatible                            " Enable vim mode.
@@ -141,9 +143,9 @@ nmap <C-N><C-N> :set invnumber<CR>
 nnoremap <F6> :set invpaste paste?<CR>
 set pastetoggle=<F6>
 
-nmap <leader>l :bnext<cr>
-nmap <leader>h :bprevious<cr>
-nmap <leader>t :enew<cr>
+nnoremap <leader>l :bnext<cr>
+nnoremap <leader>h :bprevious<cr>
+nnoremap <leader>t :enew<cr>
 
 if exists(":Tabularize")
     nmap <Leader>a= :Tabularize /=<CR>
@@ -248,3 +250,23 @@ function! ExecuteMacroOverVisualRange()
     echo "@".getcmdline()
     execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+
+" Syntastic Configuration
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_mode_map = { "mode": "passive" }
+let g:syntastic_enable_signs = 0
+
+nnoremap <leader>c :SyntasticCheck<cr>
+
+" MUcomplete Configuration
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+set completeopt+=menuone
+set completeopt+=noinsert
+set completeopt-=preview
+inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
