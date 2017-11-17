@@ -58,7 +58,7 @@ set visualbell                              " don't beep
 set noerrorbells                            " don't beep
 set autoread
 set incsearch                               " Incremental search
-set nohlsearch                              " Don't highlight searches.
+set hlsearch                                " Highlight searches.
 set showmode                                " Shows helpful cues below the statusline
 set laststatus=2                            " Force show bufferline
 set encoding=utf-8
@@ -136,12 +136,12 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 nmap <silent> <leader>e :NERDTreeToggle<cr>
 
 " Fast saves
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr>
-nmap <leader>k :bd<cr>
-nmap <C-N><C-N> :set invnumber<CR>
-nnoremap <F6> :set invpaste paste?<CR>
-set pastetoggle=<F6>
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>k :bd<cr>
+nnoremap <C-N><C-N> :set invnumber<CR>
+nnoremap <F7> :set invpaste paste?<CR>
+set pastetoggle=<F7>
 
 nnoremap <leader>l :bnext<cr>
 nnoremap <leader>h :bprevious<cr>
@@ -211,6 +211,7 @@ let g:airline_exclude_preview=1
 
 " Goyo Settings
 let g:goyo_width=110
+nnoremap <silent> <leader>g :Goyo<CR>
 
 function! StripTrailingWhitespace()
     if !&binary && &filetype != 'diff'
