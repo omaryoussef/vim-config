@@ -73,6 +73,8 @@ set gdefault                                " Global replace by default
 set path+=**                                " finding Files:
 set noswapfile
 set nobackup
+set undofile                                " Set persistent undo
+set undodir=~/.vim/undodir                  " Set undo file directory
 
 " Use ripgrep if available
 if executable("rg")
@@ -210,7 +212,7 @@ let g:airline_theme='powerlineish'
 let g:airline_exclude_preview=1
 
 " Goyo Settings
-let g:goyo_width=110
+let g:goyo_width=120
 nnoremap <silent> <leader>g :Goyo<CR>
 
 function! StripTrailingWhitespace()
