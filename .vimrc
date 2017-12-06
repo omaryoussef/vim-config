@@ -28,7 +28,14 @@ colorscheme Civic
 if has("gui_running")
     set guifont=Meslo_LG_S:h10.4
     set t_vb=0
-    set guicursor+=n-v-c:blinkon0
+    set guicursor+=n-v-c-r:blinkon0
+    set guioptions -=T
+    set guioptions -=m
+    set guioptions -=r
+    set guioptions -=R
+    set guioptions -=l
+    set guioptions -=L
+    autocmd GUIEnter * simalt ~x
 endif
 
 set t_Co=256                                " Enable 256 color mode.
