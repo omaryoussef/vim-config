@@ -268,10 +268,27 @@ nnoremap <leader>c :SyntasticCheck<cr>
 " MUcomplete Configuration
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 set completeopt+=menuone
-if(exists("&noinsert"))
-    set completeopt+=noinsert
-endif
 set completeopt-=preview
-inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+
+"if has('patch-7.4.775')
+"    set completeopt+=noinsert
+"    let g:mucomplete#enable_auto_at_startup = 0
+"    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+"    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+"    inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+"endif
+
+" Fix mucomplete and snipmate incompatibility.
+"let g:snipMate = {}
+"let g:snipMate['no_match_completion_feedkeys_chars'] = ""
+"
+"let g:mucomplete#user_mappings = {
+"     \ 'snip' : "\<plug>snipMateShow"
+"      \ }
+"let g:mucomplete#chains = {'vim': ['path', 'cmd', 'keyn'], 'default': ['path', 'snip', 'omni', 'keyn', 'dict', 'uspl']}
+"
+"imap <expr> <S-tab> (pumvisible() ? "\<c-y>" : "")
+"\               . "\<plug>snipMateNextOrTrigger"
+"
+"imap <unique> <nop> <plug>(MUcompleteBwd)
+"let g:mucomplete#cycle_with_trigger = 0
