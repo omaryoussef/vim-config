@@ -1,7 +1,6 @@
 " Measure startup time with:
 " vim --startuptime vim.log
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'godlygeek/tabular'
