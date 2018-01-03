@@ -20,7 +20,7 @@ zle -N fzf-ctrlp-widget
 
 bindkey "^p" fzf-ctrlp-widget
 
-command -v rg >/dev/null 2>&1 || { exit 0; }
+command -v rg >/dev/null 2>&1 || { return 0; }
 
 _fzf_compgen_path() {
     rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null
