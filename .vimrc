@@ -19,6 +19,8 @@ Plug 'vim-scripts/ZoomWin', { 'tag': '23' }
 Plug 'vim-syntastic/syntastic'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'lifepillar/vim-mucomplete'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 set background=dark
