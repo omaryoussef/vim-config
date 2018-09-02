@@ -150,7 +150,7 @@ nnoremap <leader>w :w!<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>f :w !sudo tee > /dev/null %<CR>
 nnoremap <leader>k :bd<cr>
-nnoremap <C-N><C-N> :set invnumber<CR>
+nnoremap <C-N><C-N> :set invnumber<CR>:set relativenumber!<CR>
 nnoremap <F7> :set invpaste paste?<CR>
 set pastetoggle=<F7>
 
