@@ -1,5 +1,6 @@
 " Measure startup time with:
 " vim --startuptime vim.log
+if !has("compatible")
 call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/goyo.vim'
@@ -8,20 +9,21 @@ Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'sheerun/vim-polyglot'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
+"Plug 'garbas/vim-snipmate'
+"Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Olical/vim-enmasse'
 Plug 'vim-scripts/ZoomWin', { 'tag': '23' }
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 Plug 'shawncplus/phpcomplete.vim'
-Plug 'lifepillar/vim-mucomplete'
+" Plug 'lifepillar/vim-mucomplete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 call plug#end()
+endif
 
 set background=dark
 colorscheme Civic
@@ -264,20 +266,20 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 " Syntastic Configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_mode_map = { "mode": "passive" }
-let g:syntastic_enable_signs = 0
-
-nnoremap <leader>c :SyntasticCheck<cr>
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_enable_highlighting = 1
+"let g:syntastic_mode_map = { "mode": "passive" }
+"let g:syntastic_enable_signs = 0
+"
+"nnoremap <leader>c :SyntasticCheck<cr>
 
 " MUcomplete Configuration
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-set completeopt+=menuone
-set completeopt-=preview
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"set completeopt+=menuone
+"set completeopt-=preview
 
 "if has('patch-7.4.775')
 "    set completeopt+=noinsert
