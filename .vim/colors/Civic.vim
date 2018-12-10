@@ -14,6 +14,7 @@ hi Cursor ctermfg=233 ctermbg=231 cterm=NONE guifg=#252630 guibg=#fcffff gui=NON
 hi Visual ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#3c4856 gui=NONE
 hi CursorLine ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#383942 gui=NONE
 hi CursorColumn ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#383942 gui=NONE
+hi SignColumn ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#383942 gui=NONE
 hi ColorColumn ctermfg=NONE ctermbg=235 cterm=NONE guifg=NONE guibg=#383942 gui=NONE
 hi LineNr ctermfg=102 ctermbg=235 cterm=NONE guifg=#83848c guibg=#383942 gui=NONE
 hi VertSplit ctermfg=235 ctermbg=235 cterm=NONE guifg=#5c5d65 guibg=#5c5d65 gui=NONE
@@ -34,11 +35,11 @@ hi Comment ctermfg=77 ctermbg=NONE cterm=NONE guifg=#32cf72 guibg=NONE gui=NONE
 hi Conditional ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
 hi Constant ctermfg=66 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
 hi Define ctermfg=168 ctermbg=NONE cterm=NONE guifg=#cf3f93 guibg=NONE gui=NONE
-hi DiffAdd ctermfg=254 ctermbg=64 cterm=bold guifg=#e1e2e7 guibg=#46830e gui=bold
-hi DiffDelete ctermfg=88 ctermbg=NONE cterm=NONE guifg=#8b080a guibg=NONE gui=NONE
-hi DiffChange ctermfg=254 ctermbg=23 cterm=NONE guifg=#e1e2e7 guibg=#23385c gui=NONE
-hi DiffText ctermfg=254 ctermbg=24 cterm=bold guifg=#e1e2e7 guibg=#204a87 gui=bold
-hi ErrorMsg ctermfg=254 ctermbg=131 cterm=NONE guifg=#e1e2e7 guibg=#af5d38 gui=NONE
+hi DiffAdd ctermfg=77 ctermbg=235 cterm=bold guifg=#e1e2e7 guibg=#46830e gui=bold
+hi DiffDelete ctermfg=89 ctermbg=235 cterm=NONE guifg=#8b080a guibg=NONE gui=NONE
+hi DiffChange ctermfg=45 ctermbg=235 cterm=NONE guifg=#e1e2e7 guibg=#23385c gui=NONE
+hi DiffText ctermfg=24 ctermbg=235 cterm=bold guifg=#e1e2e7 guibg=#204a87 gui=bold
+hi ErrorMsg ctermfg=131 ctermbg=235 cterm=NONE guifg=#e1e2e7 guibg=#af5d38 gui=NONE
 hi WarningMsg ctermfg=254 ctermbg=131 cterm=NONE guifg=#e1e2e7 guibg=#af5d38 gui=NONE
 hi Float ctermfg=173 ctermbg=NONE cterm=NONE guifg=#c77a4b guibg=NONE gui=NONE
 hi Function ctermfg=73 ctermbg=NONE cterm=NONE guifg=#56afb0 guibg=NONE gui=NONE
