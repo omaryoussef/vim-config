@@ -65,7 +65,7 @@ set showmatch                               " Show matching brackets
 set wildmenu                                " visual autocomplete for command menu
 set wildmode=list:longest,full
 set wildignorecase
-set visualbell                              " don't beep
+"set visualbell                              " don't beep
 set noerrorbells                            " don't beep
 set autoread
 set incsearch                               " Incremental search
