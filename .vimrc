@@ -22,12 +22,13 @@ Plug 'shawncplus/phpcomplete.vim'
 " Plug 'lifepillar/vim-mucomplete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
+Plug 'bkad/CamelCaseMotion'
 Plug 'mhinz/vim-signify'
 call plug#end()
 endif
 
 set background=dark
-colorscheme Civic
+colorscheme Civic_NoBackground
 
 if has("gui_running")
     set guifont=Meslo_LG_S:h10.4
@@ -143,13 +144,13 @@ map <space> /
 map <c-space> ?
 
 " Substitue all occurences of the word under the cursor
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>su :%s/\<<C-r><C-w>\>/
 
 " Open NERDTree
 nmap <silent> <leader>e :NERDTreeToggle<cr>
 
 " Fast saves
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>s :w!<cr>
 nnoremap <leader>q :q!<cr>
 nnoremap <leader>f :w !sudo tee > /dev/null %<CR>
 nnoremap <leader>k :bd<cr>
@@ -306,3 +307,5 @@ let g:signify_vcs_list = ['git']
 "
 "imap <unique> <nop> <plug>(MUcompleteBwd)
 "let g:mucomplete#cycle_with_trigger = 0
+"
+call camelcasemotion#CreateMotionMappings('<leader>')
