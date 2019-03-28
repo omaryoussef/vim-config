@@ -147,7 +147,7 @@ map <c-space> ?
 nnoremap <Leader>su :%s/\<<C-r><C-w>\>/
 
 " Open NERDTree
-nmap <silent> <leader>e :NERDTreeToggle<cr>
+nmap <silent> <leader>n :NERDTreeToggle<cr>
 
 " Fast saves
 nnoremap <leader>s :w!<cr>
