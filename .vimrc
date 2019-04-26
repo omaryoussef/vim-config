@@ -144,7 +144,7 @@ map <space> /
 map <c-space> ?
 
 " Substitue all occurences of the word under the cursor
-nnoremap <Leader>su :%s/\<<C-r><C-w>\>/
+nnoremap <Leader>b :%s/\<<C-r><C-w>\>/
 
 " Open NERDTree
 nmap <silent> <leader>n :NERDTreeToggle<cr>
