@@ -309,3 +309,4 @@ let g:signify_vcs_list = ['git']
 "let g:mucomplete#cycle_with_trigger = 0
 "
 call camelcasemotion#CreateMotionMappings('<leader>')
+let g:polyglot_disabled = ['jsx']
