@@ -2,7 +2,8 @@
 " vim --startuptime vim.log
 if !has("compatible")
 call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'godlygeek/tabular'
 "Plug 'tomtom/tlib_vim'
@@ -97,7 +98,7 @@ endif
 " Define Rg command
 " Uses Rg if available, executes grepprg silently and works
 " on <cword>
-fun! s:Rg(txt)
+fun! s:RgSearch(txt)
     let ser = a:txt
     if(empty(ser))
         let ser = expand("<cword>")
@@ -118,7 +119,7 @@ fun! s:Rg(txt)
         echo "No match found for " . ser
     endif
 endfun
-command! -nargs=* -complete=file Rg :call s:Rg(<q-args>)
+command! -nargs=* -complete=file RgSearch :call s:RgSearch(<q-args>)
 
 hi Visual ctermbg=239
 hi VisualNOS ctermbg=242
@@ -131,7 +132,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 " Global search
-nnoremap \ :Rg<SPACE>
+nnoremap \ :RgSearch<SPACE>
 
 " Underline current line with dashes
 nnoremap <F5> yyp<c-v>$r=
@@ -178,28 +179,6 @@ endif
 
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*,*.min.*
 
-" CtrlP Settings
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|node_modules|vendor)$',
-            \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|min|tags)$',
-            \}
-
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_extensions = ['tag', 'buffertags']
-let g:ctrlp_map = ''
-let g:ctrlp_root_markers = ['.ctrlp']
-
-if(executable('rg'))
-    let g:ctrlp_user_command = 'rg %s --files --no-ignore-parent --color=never --glob ""'
-    let g:ctrlp_use_caching = 0
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard'] " Ignore files in .gitignore
-endif
-
-" Use this function to prevent CtrlP opening files inside non-writeable
-" buffers, e.g. NERDTree
 function! SwitchToWriteableBufferAndExec(command)
     let c = 0
     let wincount = winnr('$')
@@ -212,10 +191,13 @@ function! SwitchToWriteableBufferAndExec(command)
 endfunction
 
 " Disable default mapping since we are overriding it with our command
-nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('CtrlP')<CR>
-nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('CtrlPBuffer')<CR>
-nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('CtrlPBufTag')<CR>
-nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('CtrlPTag')<CR>
+nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('Buffers')<CR>
+nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('BTags')<CR>
+nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('Tags')<CR>
+
+nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('GFiles')<CR>
+nnoremap <silent> <C-P> :call SwitchToWriteableBufferAndExec('Files')<CR>
+nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Rg')<CR>
 
 " Airline Settings
 
