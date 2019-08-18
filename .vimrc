@@ -198,8 +198,8 @@ nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('BTags')<CR>
 nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('Tags')<CR>
 
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('GFiles')<CR>
-nnoremap <silent> <C-P> :call SwitchToWriteableBufferAndExec('Files')<CR>
-nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Rg')<CR>
+nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Files')<CR>
+nnoremap <silent> <C-\> :call SwitchToWriteableBufferAndExec('Rg')<CR>
 
 " Airline Settings
 
