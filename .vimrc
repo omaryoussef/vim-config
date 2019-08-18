@@ -24,7 +24,9 @@ Plug 'shawncplus/phpcomplete.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'bkad/CamelCaseMotion'
+if executable("rg")
 Plug 'mhinz/vim-signify'
+endif
 call plug#end()
 endif
 
