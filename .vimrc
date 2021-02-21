@@ -95,6 +95,10 @@ set nobackup
 set undofile                                " Set persistent undo
 set undodir=~/.vim/undodir                  " Set undo file directory
 
+
+" Fix slow syntax highlighting for TS files
+set re=0
+
 " Use ripgrep if available
 if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
@@ -315,3 +319,4 @@ if executable("boxes")
     execute ":'<,'>!boxes -p h2v1 -d shell"
   endfunction
 endif
+
