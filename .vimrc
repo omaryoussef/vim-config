@@ -18,20 +18,24 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Olical/vim-enmasse'
 Plug 'vim-scripts/ZoomWin', { 'tag': '23' }
-"Plug 'vim-syntastic/syntastic'
-Plug 'shawncplus/phpcomplete.vim'
 " Plug 'lifepillar/vim-mucomplete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'bkad/CamelCaseMotion'
+Plug 'joshdick/onedark.vim'
 if executable("git")
 Plug 'mhinz/vim-signify'
+endif
+if executable("npm")
+Plug 'prettier/vim-prettier', {
+    \'do': 'npm install',
+    \'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 endif
 call plug#end()
 endif
 
 set background=dark
-colorscheme Civic_NoBackground
+colorscheme onedark
 
 if has("gui_running")
     set guifont=Meslo_LG_S:h10.4
@@ -49,11 +53,11 @@ endif
 set t_Co=256                                " Enable 256 color mode.
 set nocompatible                            " Enable vim mode.
 set nowrap                                  " Set no wrap text
-set tabstop=4                               " Tab stop to 4 spaces
-set softtabstop=4
+set tabstop=2                               " Tab stop to 4 spaces
+set softtabstop=2
 set smarttab                                " Do smart tab stops
 set expandtab
-set shiftwidth=4                            " Number of spaces for auto-indenting
+set shiftwidth=2                            " Number of spaces for auto-indenting
 set shiftround                              " Use multiple of shiftwidth when indenting with < and >
 set backspace=indent,eol,start              " Allow backspacing over everything in insert mode
 set autoindent                              " Set auto-indent on
@@ -194,8 +198,10 @@ endfunction
 
 " Disable default mapping since we are overriding it with our command
 nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('Buffers')<CR>
-nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('BTags')<CR>
-nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('Tags')<CR>
+xnoremap <silent> <F3> :'<,'>:w !pbcopy<CR><CR>
+
+"nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('BTags')<CR>
+"nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('Tags')<CR>
 
 nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('GFiles')<CR>
 nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Files')<CR>
@@ -293,4 +299,19 @@ let g:signify_vcs_list = ['git']
 "let g:mucomplete#cycle_with_trigger = 0
 "
 call camelcasemotion#CreateMotionMappings('<leader>')
-let g:polyglot_disabled = ['jsx']
+"let g:polyglot_disabled = ['jsx']
+
+let g:prettier#config#bracket_spacing = 'true'
+
+if executable("boxes")
+  command! -range ShellBox :call ShellBox()
+  command! -range Box :call Box()
+
+  function! Box()
+    execute ":'<,'>!boxes -p h2v1"
+  endfunction
+
+  function! ShellBox()
+    execute ":'<,'>!boxes -p h2v1 -d shell"
+  endfunction
+endif
