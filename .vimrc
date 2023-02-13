@@ -6,36 +6,24 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'godlygeek/tabular'
-"Plug 'tomtom/tlib_vim'
-"Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'sheerun/vim-polyglot'
-"Plug 'garbas/vim-snipmate'
-"Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Olical/vim-enmasse'
 Plug 'vim-scripts/ZoomWin', { 'tag': '23' }
-" Plug 'lifepillar/vim-mucomplete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-repeat'
 Plug 'bkad/CamelCaseMotion'
 Plug 'joshdick/onedark.vim'
+Plug 'sbdchd/neoformat'
+Plug 'arzg/vim-colors-xcode'
 if executable("git")
 Plug 'mhinz/vim-signify'
 endif
-if executable("npm")
-Plug 'prettier/vim-prettier', {
-    \'do': 'npm install',
-    \'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-endif
 call plug#end()
 endif
-
-set background=dark
-colorscheme onedark
 
 if has("gui_running")
     set guifont=Meslo_LG_S:h10.4
@@ -95,6 +83,8 @@ set nobackup
 set undofile                                " Set persistent undo
 set undodir=~/.vim/undodir                  " Set undo file directory
 
+set background=dark
+colorscheme xcodedark
 
 " Fix slow syntax highlighting for TS files
 set re=0
@@ -131,8 +121,105 @@ fun! s:RgSearch(txt)
 endfun
 command! -nargs=* -complete=file RgSearch :call s:RgSearch(<q-args>)
 
-hi Visual ctermbg=239
-hi VisualNOS ctermbg=242
+"hi Visual ctermbg=239
+"hi VisualNOS ctermbg=242
+
+" NERDTree to open directories when vim is launched on a directory
+if isdirectory(argv(0))
+    bd
+    autocmd vimenter * exe "cd" argv(0)
+    autocmd VimEnter * NERDTree
+endif
+
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*,*.min.*
+
+function! SwitchToWriteableBufferAndExec(command)
+    let c = 0
+    let wincount = winnr('$')
+    " Don't open it here if current buffer is not writable (e.g. NERDTree)
+    while !empty(getbufvar(+expand("<abuf>"), "&buftype")) && c < wincount
+        exec 'wincmd w'
+        let c = c + 1
+    endwhile
+    exec a:command
+endfunction
+
+
+" Neoformat
+let g:neoformat_try_node_exe = 1
+"autocmd BufWritePre *.js Neoformat
+
+" Airline Settings
+
+"let g:airline_extensions=['bufferline', 'ctrlp', 'tabline']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='wombat'
+let g:airline_exclude_preview=1
+
+" Goyo Settings
+let g:goyo_width=120
+
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+
+command! Strip :call StripTrailingWhitespace()
+
+" Populate list with :args first.
+" Search a word with / or *.
+" Use :Replace to replace all occurences in arglist
+function! Replace(bang, replace)
+    let flag = 'ge'
+    if !a:bang
+        let flag .= 'c'
+    endif
+    let search = '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
+    let replace = escape(a:replace, '/\&~')
+    execute 'argdo %s/' . search . '/' . replace . '/' . flag
+endfunction
+
+command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
+
+
+function! ExecuteMacroOverVisualRange()
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+let g:signify_vcs_list = ['git']
+
+
+"if has('patch-7.4.775')
+"    set completeopt+=noinsert
+"    let g:mucomplete#enable_auto_at_startup = 0
+"    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+"    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+"    inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+"endif
+
+call camelcasemotion#CreateMotionMappings('<leader>')
+"let g:polyglot_disabled = ['jsx']
+
+let g:prettier#config#bracket_spacing = 'true'
+
+if executable("boxes")
+  command! -range ShellBox :call ShellBox()
+  command! -range Box :call Box()
+
+  function! Box()
+    execute ":'<,'>!boxes -p h2v1"
+  endfunction
+
+  function! ShellBox()
+    execute ":'<,'>!boxes -p h2v1 -d shell"
+  endfunction
+endif
 
 " Shortcuts
 " =========
@@ -140,6 +227,21 @@ hi VisualNOS ctermbg=242
 " Set Leader
 let mapleader = ","
 let g:mapleader = ","
+
+" Disable default mapping since we are overriding it with our command
+nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('Buffers')<CR>
+xnoremap <silent> <F3> :'<,'>:w !pbcopy<CR><CR>
+
+nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('GFiles')<CR>
+nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Files')<CR>
+nnoremap <silent> <C-\> :call SwitchToWriteableBufferAndExec('Rg')<CR>
+
+" Or use <Leader> Replace
+nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
+
+" Use Q to repeat macro on visual lines
+xnoremap Q :'<,'>:normal @q<CR>
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 " Global search
 nnoremap \ :RgSearch<SPACE>
@@ -180,143 +282,4 @@ if exists(":Tabularize")
     vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
-" NERDTree to open directories when vim is launched on a directory
-if isdirectory(argv(0))
-    bd
-    autocmd vimenter * exe "cd" argv(0)
-    autocmd VimEnter * NERDTree
-endif
-
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.class,*.jar,*.xml,*\\node_modules\\*,*\\vendor\\*,*.min.*
-
-function! SwitchToWriteableBufferAndExec(command)
-    let c = 0
-    let wincount = winnr('$')
-    " Don't open it here if current buffer is not writable (e.g. NERDTree)
-    while !empty(getbufvar(+expand("<abuf>"), "&buftype")) && c < wincount
-        exec 'wincmd w'
-        let c = c + 1
-    endwhile
-    exec a:command
-endfunction
-
-" Disable default mapping since we are overriding it with our command
-nnoremap <silent> <F2> :call SwitchToWriteableBufferAndExec('Buffers')<CR>
-xnoremap <silent> <F3> :'<,'>:w !pbcopy<CR><CR>
-
-"nnoremap <silent> <F3> :call SwitchToWriteableBufferAndExec('BTags')<CR>
-"nnoremap <silent> <F4> :call SwitchToWriteableBufferAndExec('Tags')<CR>
-
-nnoremap <silent> <C-p> :call SwitchToWriteableBufferAndExec('GFiles')<CR>
-nnoremap <silent> <C-g> :call SwitchToWriteableBufferAndExec('Files')<CR>
-nnoremap <silent> <C-\> :call SwitchToWriteableBufferAndExec('Rg')<CR>
-
-" Airline Settings
-
-"let g:airline_extensions=['bufferline', 'ctrlp', 'tabline']
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='wombat'
-let g:airline_exclude_preview=1
-
-" Goyo Settings
-let g:goyo_width=120
 nnoremap <silent> <leader>g :Goyo<CR>
-
-function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
-        %s/\s\+$//e
-        normal 'yz<CR>
-        normal `z
-    endif
-endfunction
-
-command! Strip :call StripTrailingWhitespace()
-
-" Populate list with :args first.
-" Search a word with / or *.
-" Use :Replace to replace all occurences in arglist
-function! Replace(bang, replace)
-    let flag = 'ge'
-    if !a:bang
-        let flag .= 'c'
-    endif
-    let search = '\<' . escape(expand('<cword>'), '/\.*$^~[') . '\>'
-    let replace = escape(a:replace, '/\&~')
-    execute 'argdo %s/' . search . '/' . replace . '/' . flag
-endfunction
-
-command! -nargs=1 -bang Replace :call Replace(<bang>0, <q-args>)
-
-" Or use <Leader> Replace
-nnoremap <Leader>r :call Replace(0, input('Replace '.expand('<cword>').' with: '))<CR>
-
-" Use Q to repeat macro on visual lines
-xnoremap Q :'<,'>:normal @q<CR>
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
-function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
-let g:signify_vcs_list = ['git']
-
-" Syntastic Configuration
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_enable_highlighting = 1
-"let g:syntastic_mode_map = { "mode": "passive" }
-"let g:syntastic_enable_signs = 0
-"
-"nnoremap <leader>c :SyntasticCheck<cr>
-
-" MUcomplete Configuration
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"set completeopt+=menuone
-"set completeopt-=preview
-
-"if has('patch-7.4.775')
-"    set completeopt+=noinsert
-"    let g:mucomplete#enable_auto_at_startup = 0
-"    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-"    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-"    inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
-"endif
-
-" Fix mucomplete and snipmate incompatibility.
-"let g:snipMate = {}
-"let g:snipMate['no_match_completion_feedkeys_chars'] = ""
-"
-"let g:mucomplete#user_mappings = {
-"     \ 'snip' : "\<plug>snipMateShow"
-"      \ }
-"let g:mucomplete#chains = {'vim': ['path', 'cmd', 'keyn'], 'default': ['path', 'snip', 'omni', 'keyn', 'dict', 'uspl']}
-"
-"imap <expr> <S-tab> (pumvisible() ? "\<c-y>" : "")
-"\               . "\<plug>snipMateNextOrTrigger"
-"
-"imap <unique> <nop> <plug>(MUcompleteBwd)
-"let g:mucomplete#cycle_with_trigger = 0
-"
-call camelcasemotion#CreateMotionMappings('<leader>')
-"let g:polyglot_disabled = ['jsx']
-
-let g:prettier#config#bracket_spacing = 'true'
-
-if executable("boxes")
-  command! -range ShellBox :call ShellBox()
-  command! -range Box :call Box()
-
-  function! Box()
-    execute ":'<,'>!boxes -p h2v1"
-  endfunction
-
-  function! ShellBox()
-    execute ":'<,'>!boxes -p h2v1 -d shell"
-  endfunction
-endif
-
